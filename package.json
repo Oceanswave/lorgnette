@@ -1,0 +1,35 @@
+{
+  "name": "lorgnette",
+  "version": "0.0.0",
+  "description": "Allows a user to run PluralSight as a Kiosk.",
+  "homepage": "https://github.com/oceanswave/lorgnette",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/oceanswave/lorgnette.git"
+  },
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "author": {
+    "name": "oceanswave",
+    "email": "sean.mclellan@baristalabs.com"
+  },
+  "dependencies": {
+    "bluebird": "^3.3.3",
+    "debug": "^2.2.0",
+    "jquery": "^2.2.1",
+    "lodash": "^4.5.1",
+    "moment": "^2.11.2",
+    "nightmare": "^2.2.0",
+    "nightmare-evaluate-async": "^0.1.4",
+    "optimist": "^0.6.1",
+    "pouchdb": "^5.2.1",
+    "urijs": "^1.17.1",
+    "vo": "^3.0.0"
+  },
+  "devDependencies": {
+    "electron-packager": "^5.2.1"
+  },
+  "license": "ISC"
+}
