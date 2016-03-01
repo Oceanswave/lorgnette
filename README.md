@@ -1,6 +1,6 @@
 ﻿# lorgnette
 
-Allows a user to run PluralSight as a Kiosk.
+Allows a user to display PluralSight videos as a Kiosk.
 
 Logs in as a PluralSight subscriber and continuously plays random PluralSight videos until the process is stopped.
 
@@ -13,7 +13,7 @@ $ git clone https://github.com/oceanswave/lorgnette
 # Go into the repository
 $ cd lorgnette
 # Install dependencies and run the app
-$ npm install && npm start --username [pluralsight_username] --password [pluralsight_password] [--headless] [--fullScreen] [--forceCourseListingUpdate]
+$ npm install && node . --username [pluralsight_username] --password [pluralsight_password] [--headless] [--fullScreen] [--forceCourseListingUpdate]
 ```
 
 #####Options:
