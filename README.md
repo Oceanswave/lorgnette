@@ -82,7 +82,7 @@ Resume watching the previous course watched on Pluralsight, then, random Plurals
 node . --username "myUser" --password "mySecretPass" --continue
 ```
 
-Watch all courses in the playlist "My playlist" until the universe cools to 0 kelvin.
+Watch all courses in the user's Pluralsight playlist named "My playlist" until the universe cools to 0 kelvin.
 ```
 node . --username "myUser" --password "mySecretPass" --playlist "My playlist"
 ```
