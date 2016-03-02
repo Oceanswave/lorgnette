@@ -15,11 +15,14 @@ Needlessly click no longer! Lorgnette is here to save the day! Display Pluralsig
 
 #####What it does:
 
-Via electron through nightmare, Lorgnette logs into a Pluralsight account and plays course videos. Lorgnette bypasses "continue module" popups and remembers what you were last watching so it can continue the next time it is run.
+Lorgnette logs into a Pluralsight account and plays course videos. Lorgnette auto-clicks "continue module" popups and remembers what you were last watching so it can continue the next time it is run. 
 
-Lorgnette uses PouchDB to store the full Pluralsight course listing locally so that retriving a random course is done locally.
+Lorgnette can also auto-play all videos in a playlist or all results from a term search. Lorgnette will auto-load the next course in the playlist so you don't have to.
 
-It pulls the course listing down on first run and every 7 days thereafter. 
+Lorgnette does this all through browser automation via electron through nightmare, so view metrics are retained.
+
+
+Lorgnette uses PouchDB to store the full Pluralsight course listing locally so that retriving a random course is done locally. It pulls the course listing down on first run and every 7 days thereafter. 
 
 #####Installation:
 Ensure Node and Git are installed.
