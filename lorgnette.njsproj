@@ -30,7 +30,8 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="lib\pluralsight.js" />
+    <Compile Include="lib\index.js" />
+    <Compile Include="lib\pluralsightSession.js" />
     <Compile Include="app.js" />
     <Compile Include="lib\pluralsightRepository.js" />
     <Content Include="package.json" />
