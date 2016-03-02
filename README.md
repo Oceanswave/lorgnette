@@ -14,16 +14,16 @@ But Pluralsight prompts you every 6-10 minutes to continue the module. Ug! Who h
 Needlessly click no longer! Lorgnette is here to save the day! Display Pluralsight as a Kiosk in your lobby or binge watch Pluralsight videos from the comfort of your couch.
 
 #####What it does:
+Lorgnette auto-logs into a Pluralsight account and plays course videos. When the end of a module is reached, Lorgnette auto-clicks "continue module" popups. It also minimizes the module listing when a course is played so you don't have to.
 
-Lorgnette logs into a Pluralsight account and plays course videos. Lorgnette auto-clicks "continue module" popups and remembers what you were last watching so it can continue the next time it is run. 
+Lorgnette can also auto-play all videos in a playlist or all results from a term search. Lorgnette will auto-load and play the next course in the playlist so you don't have to.
 
-Lorgnette can also auto-play all videos in a playlist or all results from a term search. Lorgnette will auto-load the next course in the playlist so you don't have to.
+#####What is this black magic?
+Lorgnette is written in node and allows for cross-platform browser automation via electron through nightmare. Since this is browser automation, Pluralsight metrics are still captured.
 
-Lorgnette does this all through browser automation via electron through nightmare, so view metrics are retained.
+Lorgnette also uses PouchDB to store the full Pluralsight course listing locally so that retriving a random course is done locally. It pulls the course listing down on first run and every 7 days thereafter. 
 
-
-Lorgnette uses PouchDB to store the full Pluralsight course listing locally so that retriving a random course is done locally. It pulls the course listing down on first run and every 7 days thereafter. 
-
+It's also a fun experiment in ES6 function generators and coroutines. Yeah, man! Love me some coroutines!
 #####Installation:
 Ensure Node and Git are installed.
 
