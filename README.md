@@ -3,11 +3,15 @@
 Allows a user to display Pluralsight videos as a Kiosk.
 ---
 
-You've got your HDMI cable out and hooked up your laptop to your bigscreen and you're ready to have a Pluralsight marathon!
+Ever want to repurpose that big display in the lobby to show super-awesome Pluralsight videos to make your customers agog at your firm's tech-savvyness?
 
-But Pluralsight prompts you every 6-10 minutes to continue the module. Ug! Who has time for all that modal dialog button pressing?!
 
-Needlessly click no longer! Lorgnette is here to save the day! Binge watch Pluralsight videos from the comfort of your couch.
+Or perhaps you want to watch a bunch of Pluralsight videos at one time? You've got your HDMI cable out and hooked your laptop to your bigscreen and you're ready to have a Pluralsight marathon!
+
+
+But Pluralsight prompts you every 6-10 minutes to continue the module. Ug! Who has time for all that "continue module" modal dialog button pressing?!
+
+Needlessly click no longer! Lorgnette is here to save the day! Display Pluralsight as a Kiosk in your lobby or Binge watch Pluralsight videos from the comfort of your couch.
 
 #####What it does:
 
