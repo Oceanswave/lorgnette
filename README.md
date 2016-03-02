@@ -23,7 +23,7 @@ Lorgnette is written in node and allows for cross-platform browser automation vi
 
 Lorgnette also uses PouchDB to store the full Pluralsight course listing locally so that retrieving a random course is done locally. It pulls the course listing down on first run and every 7 days thereafter. 
 
-It's also a fun experiment in ES6 function generators and coroutines. Yeah, man! Love me some coroutines!
+It's also a fun experiment in node, electron, nightmare, promises, ES6 function generators and coroutines. Yeah, man! Love me some coroutines!
 #####Installation:
 Ensure Node and Git are installed.
 
