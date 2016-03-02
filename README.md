@@ -35,7 +35,7 @@ I aptly assume you Linux guys know what you're doing.
 $ git clone https://github.com/oceanswave/lorgnette
 # Go into the repository
 $ cd lorgnette
-# Install dependencies and run the app
+# Install dependencies
 $ npm install
 ```
 
