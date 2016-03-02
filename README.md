@@ -130,4 +130,5 @@ To display additional information set the following environment variable:
 ```
 SET DEBUG=lorgnette*
 ```
-
+######Why "lorgnette"?
+Because Pluralsight is cool, but [Lorgnettes](https://en.wikipedia.org/wiki/Lorgnette) are fashionable
