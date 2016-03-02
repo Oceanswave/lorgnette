@@ -7,21 +7,23 @@ You've got your HDMI cable out and hooked up your laptop to your bigscreen and y
 
 But Pluralsight prompts you every 6-10 minutes to continue the module. Ug! Who has time for all that modal dialog button pressing?!
 
-Needlessly click no longer! Lorgnette is here to save the day! Binge Pluralsight videos from the comfort of your couch.
+Needlessly click no longer! Lorgnette is here to save the day! Binge watch Pluralsight videos from the comfort of your couch.
 
 #####What it does:
 
-Via electron through nightmare, Lorgnette logs into a Pluralsight account and plays course videos. Lorgnette bypasses continue
-module popups and remembers what you were last watching so it can continue on next run.
+Via electron through nightmare, Lorgnette logs into a Pluralsight account and plays course videos. Lorgnette bypasses "continue module" popups and remembers what you were last watching so it can continue the next time it is run.
 
 Lorgnette uses PouchDB to store the full Pluralsight course listing locally so that retriving a random course is done locally.
+
 It pulls the course listing down on first run and every 7 days thereafter. 
 
 #####Installation:
 Ensure Node and Git are installed.
 
 You can easily do this on windows with [Chocolatey](https://chocolatey.org/).
+
 OSx with [HomeBrew](http://brew.sh/).
+
 I aptly assume you Linux guys know what you're doing.
 
 ```
@@ -31,8 +33,14 @@ $ git clone https://github.com/oceanswave/lorgnette
 $ cd lorgnette
 # Install dependencies and run the app
 $ npm install
+```
+
+Once installed, Lorgnette can be started with:
+
+```
 $ node . --username [pluralsight_username] --password [pluralsight_password]
 ```
+Which will login to Pluralsight with the specified credentials and play random courses until the end of time.
 
 #####Options:
 
