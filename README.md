@@ -11,7 +11,7 @@ Or perhaps you want to watch a bunch of Pluralsight videos at one time? You've g
 
 But Pluralsight prompts you every 6-10 minutes to continue the module. Ug! Who has time for all that "continue module" modal dialog button pressing?!
 
-Needlessly click no longer! Lorgnette is here to save the day! Display Pluralsight as a Kiosk in your lobby or Binge watch Pluralsight videos from the comfort of your couch.
+Needlessly click no longer! Lorgnette is here to save the day! Display Pluralsight as a Kiosk in your lobby or binge watch Pluralsight videos from the comfort of your couch.
 
 #####What it does:
 
