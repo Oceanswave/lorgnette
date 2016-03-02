@@ -14,6 +14,9 @@ Needlessly click no longer! Lorgnette is here to save the day! Binge Pluralsight
 Via electron through nightmare, Lorgnette logs into a Pluralsight account and plays course videos. Lorgnette bypasses continue
 module popups and remembers what you were last watching so it can continue on next run.
 
+Lorgnette uses PouchDB to store the full Pluralsight course listing locally so that retriving a random course is done locally.
+It pulls the course listing down on first run and every 7 days thereafter. 
+
 #####Installation:
 Ensure Node and Git are installed.
 
@@ -28,7 +31,7 @@ $ git clone https://github.com/oceanswave/lorgnette
 $ cd lorgnette
 # Install dependencies and run the app
 $ npm install
-$ node . --username [pluralsight_username] --password [pluralsight_password] [--headless] [--fullScreen] [--forceCourseListingUpdate]
+$ node . --username [pluralsight_username] --password [pluralsight_password]
 ```
 
 #####Options:
@@ -91,6 +94,11 @@ On Windows, set an environment variable of the username/password and continue th
 set lorgnette_ps_username=myUser
 set lorgnette_ps_password=mySecretPass
 node . --continue
+```
+
+Force the full course listing to be retrieved, then watch random courses forever...rever...ever..ever.ver.r.
+```
+node . --username "myUser" --password "mySecretPass" --forceCourseListingUpdate
 ```
 
 ##### Stopping:
