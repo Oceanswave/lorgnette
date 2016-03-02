@@ -3,10 +3,10 @@
 Allows a user to display Pluralsight videos as a Kiosk.
 ---
 
-Ever want to repurpose that big display in the lobby to show super-awesome Pluralsight videos to make your customers agog at your firm's tech-savvyness?
+Ever want to repurpose that big display in the lobby to show super-awesome Pluralsight videos to make your customers agog at your firm's tech savviness?
 
 
-Or perhaps you want to watch a bunch of Pluralsight videos at one time? You've got your HDMI cable out and hooked your laptop to your bigscreen and you're ready to have a Pluralsight marathon!
+Or perhaps you want to watch a bunch of Pluralsight videos at one time? You've got your HDMI cable out and hooked your laptop to your big-screen and you're ready to have a Pluralsight marathon!
 
 
 But Pluralsight prompts you every 6-10 minutes to continue the module. Ug! Who has time for all that "continue module" modal dialog button pressing?!
@@ -21,7 +21,7 @@ Lorgnette can also auto-play all videos in a playlist or all results from a term
 #####What is this black magic?
 Lorgnette is written in node and allows for cross-platform browser automation via electron through nightmare. Since this is browser automation, Pluralsight metrics are still captured.
 
-Lorgnette also uses PouchDB to store the full Pluralsight course listing locally so that retriving a random course is done locally. It pulls the course listing down on first run and every 7 days thereafter. 
+Lorgnette also uses PouchDB to store the full Pluralsight course listing locally so that retrieving a random course is done locally. It pulls the course listing down on first run and every 7 days thereafter. 
 
 It's also a fun experiment in ES6 function generators and coroutines. Yeah, man! Love me some coroutines!
 #####Installation:
