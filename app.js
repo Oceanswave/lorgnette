@@ -87,9 +87,14 @@ function* run() {
 
     var ps = new lorgnette.PluralsightSession(null, argv);
     var db = new lorgnette.PluralsightRepository();
-
+    
     console.log("Logging in...");
-    yield ps.loginAsync(psUsername, psPassword);
+    var loginSuccess = yield ps.loginAsync(psUsername, psPassword);
+    if (!loginSuccess) {
+        console.log("Unable to log into Pluralsight: Check your username/password.");
+        yield ps.end();
+        return;
+    }
 
     var courseListingStatus = yield db.getCourseListingStatusAsync();
 
