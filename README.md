@@ -152,7 +152,7 @@ SET DEBUG=lorgnette*
 
 So you truly want to run lorgnette until the end of time and want to ensure that courses are played immediately upon startup?
 
-I like your train of thought! Fortunately, lorgnette works well with [pm2](http://pm2.keymetrics.io/)!!
+I like your way of thinking! Fortunately, lorgnette works well with [pm2](http://pm2.keymetrics.io/)!!
 
 Install pm2
 ```
