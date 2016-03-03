@@ -19,7 +19,7 @@ Lorgnette auto-logs into a Pluralsight account and plays course videos. When the
 Lorgnette can also auto-play all videos in a playlist or all results from a term search. Lorgnette will auto-load and play the next course in the playlist so you don't have to.
 
 #####What is this black magic?
-Lorgnette is written in node and allows for cross-platform browser automation via electron through nightmare. Since this is browser automation, Pluralsight metrics are still captured.
+Lorgnette is written in node and allows for cross-platform (Tested on OSx and Win 10) browser automation via electron through nightmare. Since this is browser automation, Pluralsight metrics are still captured.
 
 Lorgnette also uses PouchDB to store the full Pluralsight course listing locally so that retrieving a random course is done locally. It pulls the course listing down on first run and every 7 days thereafter. 
 
