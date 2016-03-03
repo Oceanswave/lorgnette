@@ -121,39 +121,32 @@ function* run() {
         return;
     }
 
-    var watchCourse = function * (course) {
-        console.log("Watching ", course.title, ". Duration: ", course.duration);
+    var watchNext = true;
+    while (watchNext == true) {
+
+        console.log("Watching ", course.title, ". Duration: ", course.duration + " (" + course._id + ")");
         courseListingStatus.lastCourseWatched = course._id;
+
         yield db.putCourseListingStatusAsync(courseListingStatus);
-        yield ps.startWatchCourseAsync(course);
 
-        //Monitor the currently playing course...
-        var currentStatus = yield ps.getCurrentVideoStatusAsync();
-
-        do {
-            yield delay(1000);
+        var currentStatus = yield ps.watchCourseAsync(course, function (currentStatus) {
             var openModule = _.find(currentStatus.modules, { isOpen: true });
             var selectedClip = _.find(openModule.clips, { selected: true });
-            log("Currently watching module '" + openModule.title + "' - '" + selectedClip.title + "' " + currentStatus.currentTime + " / " + currentStatus.totalTime);
-            if (currentStatus.hasNextModuleShowing)
-                yield ps.startWatchNextModuleAsync();
-            currentStatus = yield ps.getCurrentVideoStatusAsync();
-        }
-        while (!currentStatus.hasEndOfCourseShowing);
+
+            var moduleTitle = _.get("title", openModule);
+            var clipTitle = _.get("title", selectedClip);
+
+            log("Currently watching module '" + moduleTitle + "' - '" + clipTitle + "' " + currentStatus.currentTime + " / " + currentStatus.totalTime);
+        });
+
         log.clear();
-
-        return currentStatus;
-    }
-
-    while (1 === 1) {
-        var currentStatus = yield watchCourse(course);
 
         if (currentStatus.hasEndOfCourseShowing) {
             console.log("Completed Course ", course.title);
-            var nextCourse = yield getNextCourse(ps, db, false);
-            
-            //Will this eventually tear a hole in the universe?? Time will only tell.
-            yield watchCourse(nextCourse);
+            course = yield getNextCourse(ps, db, false);
+        } else {
+            console.log("Didn't expect this! Exiting! ", course.title);
+            watchNext = false;
         }
     }
 
