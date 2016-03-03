@@ -5,13 +5,11 @@ Allows Pluralsight courses to be watched without user input.
 
 Ever want to repurpose that big display in the lobby to show super-awesome Pluralsight videos to make your customers agog at your firm's tech savviness?
 
-
 Or perhaps you want to watch a bunch of Pluralsight videos at one time? You've got your HDMI cable out and hooked your laptop to your big-screen and you're ready to have a Pluralsight marathon!
-
 
 But Pluralsight prompts you every 6-10 minutes to continue the module. Ug! Who has time for all that "continue module" modal dialog button pressing?!
 
-Needlessly click no longer! Lorgnette is here to save the day! Display Pluralsight as a Kiosk in your lobby or binge watch Pluralsight videos from the comfort of your couch.
+Needlessly click no longer! Lorgnette is here to save the day! Display Pluralsight as a Kiosk in your lobby or binge watch Pluralsight videos from the comfort of your couch. Passively watch Pluralsight courses on that second monitor! The world is your oyster once again!
 
 #####What it does:
 Launched from the console, Lorgnette auto-logs into a Pluralsight account and plays course videos. When the end of a module is reached, Lorgnette auto-clicks "continue module" popups. It also minimizes the module listing when a course is played so you don't have to. It'll also play in "kiosk" mode and display automatically in full-screen presentation.
