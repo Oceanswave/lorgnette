@@ -85,9 +85,9 @@ Watch random Pluralsight videos in fullscreen mode until the sun expands, evapor
 node . --username "myUser" --password "mySecretPass" --fullscreen
 ```
 
-Watch, in a window, the course on Video Studio Code, then, random Pluralsight videos until the sun implodes.
+Watch, in a window, the course on Visual Studio Code, then, random Pluralsight videos until the sun implodes.
 ```
-node . --username "myUser" --password "mySecretPass" --startAt video-studio-code
+node . --username "myUser" --password "mySecretPass" --startAt visual-studio-code
 ```
 
 Watch random Pluralsight courses in the search results for "SharePoint" until the sun burns out.
