@@ -123,12 +123,39 @@ What? You DON'T to watch courses until the end of time?!
 Well then, simply close the browser window, or ctrl-c the process.
 
 Cosmological crisis adverted! (Just think of the power bill you just saved!)
-#####Debugging:
+##### Debugging:
 
 To display additional information set the following environment variable:
 
 ```
 SET DEBUG=lorgnette*
 ```
+
+##### Auto-play on system start.
+
+So you truly want to run lorgnette until the end of time and want to ensure that courses are played immediately upon startup?
+
+I like your train of thought! Fortunately, lorgnette works well with (pm2)[http://pm2.keymetrics.io/]!!
+
+Install pm2
+```
+$ npm install pm2 -g
+```
+
+and let pm2 start and monitor the process
+
+```
+pm2 start app.js --continue
+```
+
+then have pm2 start lorgnette at system startup with
+
+```
+pm2 startup
+pm2 save
+```
+
+(see here for full details)[http://pm2.keymetrics.io/docs/usage/startup/]
+
 ######Why "lorgnette"?
 Because Pluralsight is cool, but [Lorgnettes](https://en.wikipedia.org/wiki/Lorgnette) are fashionable
