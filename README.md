@@ -47,16 +47,6 @@ $ node . --username [pluralsight_username] --password [pluralsight_password]
 ```
 Which will login to Pluralsight with the specified credentials and play random courses until the end of time.
 
-#####Updating
-
-You should know this, but here for posterity!
-```
-$ git pull
-$ npm up
-```
-
-That's all!
-
 #####Options:
 
 |CLI Argument | Optional/Required | Description
@@ -145,6 +135,16 @@ To display additional information set the following environment variable:
 ```
 SET DEBUG=lorgnette*
 ```
+
+#####Updating
+
+You should know this, but here for posterity!
+```
+$ git pull
+$ npm up
+```
+
+That's all!
 
 ##### Auto-play on system start:
 
