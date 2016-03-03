@@ -1,6 +1,6 @@
 ﻿# <img src="https://raw.githubusercontent.com/oceanswave/lorgnette/master/lorgnette.png" alt="Lorgnette" width="48"> Lorgnette
 
-Allows a user to display Pluralsight videos as a Kiosk.
+Allows Pluralsight courses to be watched without user input.
 ---
 
 Ever want to repurpose that big display in the lobby to show super-awesome Pluralsight videos to make your customers agog at your firm's tech savviness?
