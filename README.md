@@ -135,7 +135,7 @@ SET DEBUG=lorgnette*
 
 So you truly want to run lorgnette until the end of time and want to ensure that courses are played immediately upon startup?
 
-I like your train of thought! Fortunately, lorgnette works well with (pm2)[http://pm2.keymetrics.io/]!!
+I like your train of thought! Fortunately, lorgnette works well with [pm2](http://pm2.keymetrics.io/)!!
 
 Install pm2
 ```
@@ -155,7 +155,7 @@ pm2 startup
 pm2 save
 ```
 
-(see here for full details)[http://pm2.keymetrics.io/docs/usage/startup/]
+[see here for full details](http://pm2.keymetrics.io/docs/usage/startup/)
 
 ######Why "lorgnette"?
 Because Pluralsight is cool, but [Lorgnettes](https://en.wikipedia.org/wiki/Lorgnette) are fashionable
