@@ -135,7 +135,7 @@ node . --username "myUser" --password "mySecretPass" --forceCourseListingUpdate
 
 ##### Stopping:
 
-What? You DON'T to watch courses until the end of time?!
+What? You DON'T want to watch courses until the end of time?!
 
 Well then, simply close the browser window, or ctrl-c the process.
 
