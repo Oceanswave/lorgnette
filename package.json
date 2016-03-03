@@ -22,7 +22,7 @@
     "jquery": "^2.2.1",
     "lodash": "^4.5.1",
     "moment": "^2.11.2",
-    "nightmare": "^2.2.0",
+    "nightmare": "Oceanswave/nightmare",
     "nightmare-evaluate-async": "^0.1.4",
     "optimist": "^0.6.1",
     "pouchdb": "^5.2.1",

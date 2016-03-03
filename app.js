@@ -137,7 +137,7 @@ function* run() {
             var moduleTitle = _.get(openModule, "title");
             var clipTitle = _.get(selectedClip, "title");
 
-            log("Currently watching module '" + moduleTitle + "' - '" + clipTitle + "' " + currentStatus.currentTime + " / " + currentStatus.totalTime);
+            log("Currently playing module '" + moduleTitle + "' - '" + clipTitle + "' " + currentStatus.currentTime + " / " + currentStatus.totalTime);
         });
 
         log.clear();

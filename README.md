@@ -56,6 +56,7 @@ Which will login to Pluralsight with the specified credentials and play random c
 |username | Required | The username of the subscriber to run the kiosk as.|
 |password | Required | The password of the subscriber to run the kiosk as.|
 |headless | Optional | Don't display a window. Pluralsight videos will continue to play, however, a UI will not be displayed.|
+|muted| Optional | Specify that Lorgnette should mute audio |
 |fullscreen | Optional | Run the kiosk in fullscreen mode.|
 |forceCourseListingUpdate | Optional | Force a course listing update. If not specified, the course listing is only retrieved once every 7 days.|
 |startAt | Optional | Specify a specific course by id to start playback at.|
@@ -94,9 +95,15 @@ Watch all courses in the user's Pluralsight playlist named "My playlist" until t
 node . --username "myUser" --password "mySecretPass" --playlist "My playlist"
 ```
 
-Watch all courses in the playlist "My playlist" headlessly (e.g. without a window) until the universe turns dark.
+Watch all courses in the playlist "My playlist" headlessly (e.g. without a window, but audio will still be heard) until the universe turns dark.
 ```
 node . --username "myUser" --password "mySecretPass" --playlist "My playlist" --headless
+```
+
+Watch all courses in the playlist "My playlist" headlessly and muted until all atoms in the universe are far apart from one another.
+(What exactly are you doing here? :see_no_evil: :hear_no_evil: :speak_no_evil:)
+```
+node . --username "myUser" --password "mySecretPass" --playlist "My playlist" --headless --muted
 ```
 
 Continue watching the previously watched course, then watch all videos in the playlist "My playlist" headlessly (e.g. without a window).
