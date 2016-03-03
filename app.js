@@ -130,11 +130,12 @@ function* run() {
         yield db.putCourseListingStatusAsync(courseListingStatus);
 
         var currentStatus = yield ps.watchCourseAsync(course, function (currentStatus) {
+            
             var openModule = _.find(currentStatus.modules, { isOpen: true });
             var selectedClip = _.find(openModule.clips, { selected: true });
 
-            var moduleTitle = _.get("title", openModule);
-            var clipTitle = _.get("title", selectedClip);
+            var moduleTitle = _.get(openModule, "title");
+            var clipTitle = _.get(selectedClip, "title");
 
             log("Currently watching module '" + moduleTitle + "' - '" + clipTitle + "' " + currentStatus.currentTime + " / " + currentStatus.totalTime);
         });
