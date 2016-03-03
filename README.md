@@ -55,7 +55,7 @@ Which will login to Pluralsight with the specified credentials and play random c
 |-------------|-------------------|--------------------|
 |username | Required | The username of the subscriber to run the kiosk as.|
 |password | Required | The password of the subscriber to run the kiosk as.|
-|headless | Optional | Don't display a window. Pluralsight videos will continue to play, however, just no UI will be displayed.|
+|headless | Optional | Don't display a window. Pluralsight videos will continue to play, however, a UI will not be displayed.|
 |fullscreen | Optional | Run the kiosk in fullscreen mode.|
 |forceCourseListingUpdate | Optional | Force a course listing update. If not specified, the course listing is only retrieved once every 7 days.|
 |startAt | Optional | Specify a specific course by id to start playback at.|
