@@ -131,7 +131,7 @@ To display additional information set the following environment variable:
 SET DEBUG=lorgnette*
 ```
 
-##### Auto-play on system start.
+##### Auto-play on system start:
 
 So you truly want to run lorgnette until the end of time and want to ensure that courses are played immediately upon startup?
 
