@@ -116,6 +116,13 @@ set lorgnette_ps_password=mySecretPass
 node . --continue
 ```
 
+On OSx, set an environment variable of the username/password and continue the last course watched.
+```
+launchctl setenv lorgnette_ps_username myUser
+launchctl setenv lorgnette_ps_password mySecretPass
+node . --continue
+```
+
 Force the full course listing to be retrieved, then watch random courses forever...rever...ever..ever.ver.r.
 ```
 node . --username "myUser" --password "mySecretPass" --forceCourseListingUpdate
