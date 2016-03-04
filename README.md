@@ -116,10 +116,10 @@ set lorgnette_ps_password=mySecretPass
 node . --continue
 ```
 
-On OSx, set an environment variable of the username/password and continue the last course watched.
+On OSx, using terminal (Bash), set an environment variable of the username/password and continue the last course watched.
 ```
-launchctl setenv lorgnette_ps_username myUser
-launchctl setenv lorgnette_ps_password mySecretPass
+export lorgnette_ps_username=myUser
+export lorgnette_ps_password=mySecretPass
 node . --continue
 ```
 
