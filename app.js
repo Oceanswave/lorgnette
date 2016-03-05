@@ -81,17 +81,15 @@ function* getNextCourse(ps, db, isStarting) {
 function* run() {
     var lorgnette = require("./lib");
 
-    log.clear();
-
     if (argv.delayFor) {
-        log("Delaying start for " + argv.delayFor + " seconds.");
-        log.clear();
+        console.log("Delaying start for " + argv.delayFor + " seconds.\r\n");
 
         for (var i = argv.delayFor; i >= 0; i--) {
             var dur = moment.duration(i, 'seconds')
             log("Starting in " + dur.hours() + "h" + dur.minutes() + "m" + dur.seconds() + "s");
             yield delay(1000);
         }
+        log("");
         log.clear();
     }
 
@@ -108,24 +106,19 @@ function* run() {
     }
 
     if (stopTime != null) {
-        log("Watching until", stopTime.format("lll"));
-        log.clear();
+        console.log("Watching until", stopTime.format("lll") + "\r\n");
     }
 
-    console.log();
-
-    log("Starting PluralSight Kiosk...");
-    log.clear();
+    console.log("Starting PluralSight Kiosk...");
 
     var ps = new lorgnette.PluralsightSession(null, argv);
     var db = new lorgnette.PluralsightRepository();
     
-    log("Logging in...");
-    log.clear();
+    console.log("Logging in...");
+
     var loginSuccess = yield ps.loginAsync(psUsername, psPassword);
     if (!loginSuccess) {
-        log("Unable to log into Pluralsight: Check your username/password.");
-        log.clear();
+        console.log("Unable to log into Pluralsight: Check your username/password.");
         yield ps.end();
         return;
     }
@@ -134,8 +127,7 @@ function* run() {
 
     var now = moment();
     if (argv.forceCourseListingUpdate || (!courseListingStatus || moment(courseListingStatus.lastRetrieved).isBefore(now.subtract(7, 'days')))) {
-        log("Retrieving course listing... (this will take a moment)");
-        log.clear();
+        console.log("Retrieving course listing... (this will take a moment)");
         var courses = yield ps.getAllCoursesAsync();
         var results = yield db.putCourseListingsAsync(courses);
 
@@ -145,15 +137,13 @@ function* run() {
         courseListingStatus.count = courses.length;
 
         var statusResult = yield db.putCourseListingStatusAsync(courseListingStatus);
-        log("Updated course listing...");
-        log.clear();
+        console.log("Updated course listing...");
     }
     
     var course = yield getNextCourse(ps, db, true);
 
     if (!course) {
-        log("Unable to find the specified course.");
-        log.clear();
+        console.log("Unable to find the specified course.");
         yield ps.end();
         return;
     }
@@ -161,8 +151,7 @@ function* run() {
     var watchNext = true;
     while (watchNext == true) {
 
-        log("Watching ", course.title, ". Duration: ", course.duration + " (" + course._id + ")");
-        log.clear();
+        console.log("Watching", course.title, ". Duration:", course.duration + "(" + course._id + ")");
         courseListingStatus.lastCourseWatched = course._id;
 
         yield db.putCourseListingStatusAsync(courseListingStatus);
@@ -185,27 +174,28 @@ function* run() {
         });
 
         log.clear();
-        log("Stopped watching video: ", currentStatus.status + " ", course.title);
-        log.clear();
+        console.log();
+        console.log("Stopped watching video: ", currentStatus.status + " ", course.title);
 
         switch (currentStatus.status) {
             case "Completed Course":
+                console.log("Completed Course, moving on to the next one.");
                 course = yield getNextCourse(ps, db, false);
                 break;
             case "Course Video Stuck":
-                log("Course video was stuck. Continuing.");
+                console.log("Course video was stuck. Continuing.");
                 break;
             case "End of time allocated":
                 watchNext = false;
                 break;
             default:
-                log("Didn't expect this! Exiting!");
-                log.clear();
+                console.log("Didn't expect this! Exiting!");
                 watchNext = false;
                 break;
         }
     }
 
+    console.log("Logging out...");
     yield ps.gotoDashboard();
     yield ps.logoutAsync();
     yield ps.end();
