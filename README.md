@@ -63,6 +63,9 @@ Which will login to Pluralsight with the specified credentials and play random c
 |search| Optional | Specify that Lorgnette should display courses with the specified search terms. |
 |showClosedCaptioning | Optional | Specify that Lorgnette should show closed captioning. |
 |speed | Optional | Specify a playback speed. Value from 0.5 to 2.0. |
+|delayStart | Optional | Delay starting for n number of seconds. This easily delays the playback on system restart or when invoking from a script. |
+|watchFor | Optional | Only watch videos for exactly n number of minutes and then logout of Pluralsight and exit. Good for chaining Lorgnette in a script as part of other information sources when displaying on a Kiosk. |
+|watchAbout | Optional | Only watch videos about n number of minutes and then logout of Pluralsight and exit. |
 
 Note:
 username/password can be specified via environment variables rather than CLI arguments.

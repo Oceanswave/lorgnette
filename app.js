@@ -81,6 +81,39 @@ function* getNextCourse(ps, db, isStarting) {
 function* run() {
     var lorgnette = require("./lib");
 
+    log.clear();
+
+    if (argv.delayFor) {
+        log("Delaying start for " + argv.delayFor + " seconds.");
+        log.clear();
+
+        for (var i = argv.delayFor; i >= 0; i--) {
+            var dur = moment.duration(i, 'seconds')
+            log("Starting in " + dur.hours() + "h" + dur.minutes() + "m" + dur.seconds() + "s");
+            yield delay(1000);
+        }
+        log.clear();
+    }
+
+    var stopTime = null;
+    if (argv.watchFor || argv.watchAbout) {
+        stopTime = moment().add(argv.watchAbout || argv.watchFor, "minutes");
+    }
+
+    if (argv.watchAbout) {
+        //Add 30% randomness
+        var span = moment.duration(argv.watchAbout, "minutes").asSeconds() * 0.3;
+        var rand = _.random(span * -1, span, false);
+        stopTime = stopTime.add(rand, "seconds");
+    }
+
+    if (stopTime != null) {
+        log("Watching until", stopTime.format("lll"));
+        log.clear();
+    }
+
+    console.log();
+
     log("Starting PluralSight Kiosk...");
     log.clear();
 
@@ -143,6 +176,12 @@ function* run() {
             var clipTitle = _.get(selectedClip, "title");
 
             log("Currently playing module '" + moduleTitle + "' - '" + clipTitle + "' " + currentStatus.currentTime + " / " + currentStatus.totalTime);
+
+            //If a stop time is defined, and the current time is after the stop time, request cancellation.
+            if (stopTime && moment().isAfter(stopTime)) {
+                currentStatus.status = "End of time allocated";
+                return true;
+            }
         });
 
         log.clear();
@@ -156,14 +195,18 @@ function* run() {
             case "Course Video Stuck":
                 log("Course video was stuck. Continuing.");
                 break;
+            case "End of time allocated":
+                watchNext = false;
+                break;
             default:
-                log("Didn't expect this! Exiting! ", course.title);
+                log("Didn't expect this! Exiting!");
                 log.clear();
                 watchNext = false;
                 break;
         }
     }
 
+    yield ps.gotoDashboard();
     yield ps.logoutAsync();
     yield ps.end();
 }
