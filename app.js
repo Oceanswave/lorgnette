@@ -5,8 +5,6 @@ var _ = require("lodash");
 var delay = require("delay");
 
 var Nightmare = require('nightmare');
-//Note: if you see the maxEventEmitters reached errors, open ipc.js in /nightmare and add Emitter.defaultMaxListeners = 0;
-//https://github.com/segmentio/nightmare/issues/282
 
 // Adds evaluateAsync method 
 require('nightmare-evaluate-async')(Nightmare);
@@ -83,15 +81,18 @@ function* getNextCourse(ps, db, isStarting) {
 function* run() {
     var lorgnette = require("./lib");
 
-    console.log("Starting PluralSight Kiosk...");
+    log("Starting PluralSight Kiosk...");
+    log.clear();
 
     var ps = new lorgnette.PluralsightSession(null, argv);
     var db = new lorgnette.PluralsightRepository();
     
-    console.log("Logging in...");
+    log("Logging in...");
+    log.clear();
     var loginSuccess = yield ps.loginAsync(psUsername, psPassword);
     if (!loginSuccess) {
-        console.log("Unable to log into Pluralsight: Check your username/password.");
+        log("Unable to log into Pluralsight: Check your username/password.");
+        log.clear();
         yield ps.end();
         return;
     }
@@ -100,7 +101,8 @@ function* run() {
 
     var now = moment();
     if (argv.forceCourseListingUpdate || (!courseListingStatus || moment(courseListingStatus.lastRetrieved).isBefore(now.subtract(7, 'days')))) {
-        console.log("Retrieving course listing... (this will take a moment)");
+        log("Retrieving course listing... (this will take a moment)");
+        log.clear();
         var courses = yield ps.getAllCoursesAsync();
         var results = yield db.putCourseListingsAsync(courses);
 
@@ -110,13 +112,15 @@ function* run() {
         courseListingStatus.count = courses.length;
 
         var statusResult = yield db.putCourseListingStatusAsync(courseListingStatus);
-        console.log("Updated course listing...");
+        log("Updated course listing...");
+        log.clear();
     }
     
     var course = yield getNextCourse(ps, db, true);
 
     if (!course) {
-        console.log("Unable to find the specified course.");
+        log("Unable to find the specified course.");
+        log.clear();
         yield ps.end();
         return;
     }
@@ -124,7 +128,8 @@ function* run() {
     var watchNext = true;
     while (watchNext == true) {
 
-        console.log("Watching ", course.title, ". Duration: ", course.duration + " (" + course._id + ")");
+        log("Watching ", course.title, ". Duration: ", course.duration + " (" + course._id + ")");
+        log.clear();
         courseListingStatus.lastCourseWatched = course._id;
 
         yield db.putCourseListingStatusAsync(courseListingStatus);
@@ -141,13 +146,18 @@ function* run() {
         });
 
         log.clear();
+        log("Stopped watching video: ", currentStatus.status + " ", course.title);
+        log.clear();
 
-        if (currentStatus.hasEndOfCourseShowing) {
-            console.log("Completed Course ", course.title);
-            course = yield getNextCourse(ps, db, false);
-        } else {
-            console.log("Didn't expect this! Exiting! ", course.title);
-            watchNext = false;
+        switch (currentStatus.status) {
+            case "Completed Course":
+                course = yield getNextCourse(ps, db, false);
+            case "Course Video Stuck":
+                log("Course video was stuck. Continuing.");
+            default:
+                log("Didn't expect this! Exiting! ", course.title);
+                log.clear();
+                watchNext = false;
         }
     }
 
