@@ -152,12 +152,15 @@ function* run() {
         switch (currentStatus.status) {
             case "Completed Course":
                 course = yield getNextCourse(ps, db, false);
+                break;
             case "Course Video Stuck":
                 log("Course video was stuck. Continuing.");
+                break;
             default:
                 log("Didn't expect this! Exiting! ", course.title);
                 log.clear();
                 watchNext = false;
+                break;
         }
     }
 

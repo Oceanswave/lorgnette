@@ -62,6 +62,7 @@ Which will login to Pluralsight with the specified credentials and play random c
 |playlist| Optional | Specify that Lorgnette should display courses in the specified Pluralsight playlist. (Playlist can be mutated while displaying) |
 |search| Optional | Specify that Lorgnette should display courses with the specified search terms. |
 |showClosedCaptioning | Optional | Specify that Lorgnette should show closed captioning. |
+|speed | Optional | Specify a playback speed. Value from 0.5 to 2.0. |
 
 Note:
 username/password can be specified via environment variables rather than CLI arguments.
@@ -79,14 +80,14 @@ Watch, in a window, the course on Visual Studio Code, then, random Pluralsight v
 node . --username "myUser" --password "mySecretPass" --startAt visual-studio-code
 ```
 
-Watch random Pluralsight courses in the search results for "SharePoint" until the sun burns out.
+Watch random Pluralsight courses in the search results for "SharePoint" at 2.0x speed until the sun burns out.
 ```
-node . --username "myUser" --password "mySecretPass" --search "SharePoint"
+node . --username "myUser" --password "mySecretPass" --search "SharePoint" --speed 2.0
 ```
 
-Watch random Pluralsight courses in the search results for "SharePoint" muted with closed captioning until black holes give up their goods
+Watch random Pluralsight courses in the search results for "SharePoint 2013" muted with closed captioning until black holes give up their goods
 ```
-node . --username "myUser" --password "mySecretPass" --search "SharePoint" --muted --showClosedCaptioning
+node . --username "myUser" --password "mySecretPass" --search "SharePoint 2013" --muted --showClosedCaptioning
 ```
 
 Resume watching the previous course watched on Pluralsight, then, random Pluralsight videos until entropy wins.
