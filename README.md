@@ -53,20 +53,20 @@ Which will login to Pluralsight with the specified credentials and play random c
 |-------------|-------------------|--------------------|
 |username | Required | The username of the subscriber to run the kiosk as.|
 |password | Required | The password of the subscriber to run the kiosk as.|
-|headless | Optional | Don't display a window. Pluralsight videos will continue to play, however, a UI will not be displayed.|
-|muted| Optional | Specify that Lorgnette should mute audio |
-|fullscreen | Optional | Run the kiosk in fullscreen mode.|
-|showClosedCaptioning | Optional | Specify that Lorgnette should show closed captioning. |
-|speed | Optional | Specify a playback speed. Value from 0.5 to 2.0. |
-|startAt | Optional | Specify a specific course by id to start playback at.|
-|continue| Optional | Specify that Lorgnette should continue at the last course watched |
-|playlist| Optional | Specify that Lorgnette should display courses in the specified Pluralsight playlist, looping to the first when completed. (Playlist can be mutated while displaying) |
-|thenStop | Optional | Applies only if playlist has been supplied. Watches the indicated playlist then stops. |
-|search| Optional | Specify that Lorgnette should play courses with the specified search terms. Courses are selected and played randomly from the results. |
-|delayStart | Optional | Delay starting for n number of seconds. This easily delays the playback on system restart or when invoking from a script. |
-|watchFor | Optional | Only watch videos for exactly n number of minutes and then logout of Pluralsight and exit. Good for chaining Lorgnette in a script as part of other information sources when displaying on a Kiosk. |
-|watchAbout | Optional | Only watch videos about n number of minutes and then logout of Pluralsight and exit. |
-|forceCourseListingUpdate | Optional | Force a course listing update. If not specified, the course listing is only retrieved once every 7 days.|
+|headless | Optional | Don't display a window. Pluralsight videos will continue to play, however, a UI will not be displayed. (default: false)|
+|muted| Optional | Specify that Lorgnette should mute audio. (default: false)|
+|fullscreen | Optional | Run the kiosk in fullscreen mode. (default: false)|
+|showClosedCaptioning | Optional | Specify that Lorgnette should show closed captioning. (default: false)|
+|speed | Optional | Specify a playback speed. Value from 0.5 to 2.0. (default: 1.0)|
+|startAt | Optional | Specify a specific course by id to start playback at. (default: none)|
+|continue| Optional | Specify that Lorgnette should continue at the last course watched. (default: false) |
+|playlist| Optional | Specify that Lorgnette should display courses in the specified Pluralsight playlist, looping to the first when completed (Playlist can be mutated while displaying). (default: none)|
+|thenStop | Optional | Applies only if playlist has been supplied. Watches the indicated playlist then stops. (default: false)|
+|search| Optional | Specify that Lorgnette should play courses with the specified search terms. Courses are selected and played randomly from the results. (default: none)|
+|delayStart | Optional | Delay starting for n number of seconds. This easily delays the playback on system restart or when invoking from a script. (default: no delay)|
+|watchFor | Optional | Only watch videos for exactly n number of minutes and then logout of Pluralsight and exit. Good for chaining Lorgnette in a script as part of other information sources when displaying on a Kiosk. (default: none) |
+|watchAbout | Optional | Only watch videos about n number of minutes and then logout of Pluralsight and exit. (default: none)|
+|forceCourseListingUpdate | Optional | Force a course listing update. If not specified, the course listing is only retrieved once every 7 days. (default: false)|
 
 Note:
 username/password can be specified via environment variables rather than CLI arguments.
