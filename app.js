@@ -60,6 +60,10 @@ function* getNextCourse(ps, db, isStarting) {
             if (existingIndex > -1 && existingIndex < selectedPlaylist.playlistItems.length - 1) {
                 return yield db.getCourseByIdAsync(selectedPlaylist.playlistItems[existingIndex + 1].course.name);
             }
+
+            //If we're about to loop around, and thenStop has been specified as an argument, don't return a course.
+            if (!isStarting && argv.thenStop)
+                return null;
         }
 
         //Otherwise start at the first course in the playlist.
@@ -140,15 +144,18 @@ function* run() {
         console.log("Updated course listing...");
     }
     
+    var watchNext = true;
+
     var course = yield getNextCourse(ps, db, true);
 
     if (!course) {
-        console.log("Unable to find the specified course.");
-        yield ps.end();
-        return;
+        if (argv.thenStop)
+            console.log("Playlist completed. Stopping.");
+        else
+            console.log("Unable to find a course to play given the supplied arguments.");
+        watchNext = false;
     }
 
-    var watchNext = true;
     while (watchNext == true) {
 
         console.log("Watching", course.title, ". Duration:", course.duration + "(" + course._id + ")");
@@ -181,6 +188,15 @@ function* run() {
             case "Completed Course":
                 console.log("Completed Course, moving on to the next one.");
                 course = yield getNextCourse(ps, db, false);
+
+                if (!course) {
+                    if (argv.thenStop)
+                        console.log("Playlist completed. Stopping.");
+                    else
+                        console.log("Unable to find a course to play.");
+                    
+                    watchNext = false;
+                }
                 break;
             case "Course Video Stuck":
                 console.log("Course video was stuck. Continuing.");

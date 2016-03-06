@@ -56,16 +56,17 @@ Which will login to Pluralsight with the specified credentials and play random c
 |headless | Optional | Don't display a window. Pluralsight videos will continue to play, however, a UI will not be displayed.|
 |muted| Optional | Specify that Lorgnette should mute audio |
 |fullscreen | Optional | Run the kiosk in fullscreen mode.|
-|forceCourseListingUpdate | Optional | Force a course listing update. If not specified, the course listing is only retrieved once every 7 days.|
-|startAt | Optional | Specify a specific course by id to start playback at.|
-|continue| Optional | Specify that Lorgnette should continue at the last course watched |
-|playlist| Optional | Specify that Lorgnette should display courses in the specified Pluralsight playlist. (Playlist can be mutated while displaying) |
-|search| Optional | Specify that Lorgnette should display courses with the specified search terms. |
 |showClosedCaptioning | Optional | Specify that Lorgnette should show closed captioning. |
 |speed | Optional | Specify a playback speed. Value from 0.5 to 2.0. |
+|startAt | Optional | Specify a specific course by id to start playback at.|
+|continue| Optional | Specify that Lorgnette should continue at the last course watched |
+|playlist| Optional | Specify that Lorgnette should display courses in the specified Pluralsight playlist, looping to the first when completed. (Playlist can be mutated while displaying) |
+|thenStop | Optional | Applies only if playlist has been supplied. Watches the indicated playlist then stops. |
+|search| Optional | Specify that Lorgnette should play courses with the specified search terms. Courses are selected and played randomly from the results. |
 |delayStart | Optional | Delay starting for n number of seconds. This easily delays the playback on system restart or when invoking from a script. |
 |watchFor | Optional | Only watch videos for exactly n number of minutes and then logout of Pluralsight and exit. Good for chaining Lorgnette in a script as part of other information sources when displaying on a Kiosk. |
 |watchAbout | Optional | Only watch videos about n number of minutes and then logout of Pluralsight and exit. |
+|forceCourseListingUpdate | Optional | Force a course listing update. If not specified, the course listing is only retrieved once every 7 days.|
 
 Note:
 username/password can be specified via environment variables rather than CLI arguments.
@@ -101,6 +102,11 @@ node . --username "myUser" --password "mySecretPass" --continue
 Watch all courses in the user's Pluralsight playlist named "My playlist" until the universe cools to 0 kelvin.
 ```
 node . --username "myUser" --password "mySecretPass" --playlist "My playlist"
+```
+
+Watch all courses in the playlist "My playlist" once, then stop.
+```
+node . --username "myUser" --password "mySecretPass" --playlist "My playlist" --thenStop
 ```
 
 Watch all courses in the playlist "My playlist" headlessly (e.g. without a window, but audio will still be heard) until the universe turns dark.
