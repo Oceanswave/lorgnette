@@ -3,6 +3,7 @@ var vo = require("vo");
 var moment = require("moment");
 var _ = require("lodash");
 var delay = require("delay");
+var colors = require("colors");
 
 var Nightmare = require('nightmare');
 
@@ -16,18 +17,36 @@ var psUsername = argv.username || process.env.lorgnette_ps_username;
 var psPassword = argv.password || process.env.lorgnette_ps_password;
 
 if (!psUsername) {
-    console.log("Error: A Pluralsight username must be specified either as a -username argument or via a 'lorgnette_ps_username' environment variable");
+    console.error("Error: A Pluralsight username must be specified either as a -username argument or via a 'lorgnette_ps_username' environment variable");
     process.exit(1);
 }
 
 if (!psPassword) {
-    console.log("Error: A Pluralsight password must be specified either as a -password argument or via a 'lorgnette_ps_password' environment variable");
+    console.error("Error: A Pluralsight password must be specified either as a -password argument or via a 'lorgnette_ps_password' environment variable");
     process.exit(1);
 }
 
 vo(run)(function (err, result) {
     if (err) throw err;
 });
+
+function* ensureCourseListingIsCurrent(ps, db, force) {
+    var courseListingStatus = yield db.getCourseListingStatusAsync();
+
+    if (force || !courseListingStatus || moment(courseListingStatus.lastRetrieved).isBefore(moment().subtract(7, 'days'))) {
+        console.log("Retrieving course listing... (this will take a moment)".bold.yellow);
+        var courses = yield ps.getAllCoursesAsync();
+        var results = yield db.putCourseListingsAsync(courses);
+
+        if (!courseListingStatus)
+            courseListingStatus = {};
+        courseListingStatus.lastRetrieved = moment().toDate();
+        courseListingStatus.count = courses.length;
+
+        var statusResult = yield db.putCourseListingStatusAsync(courseListingStatus);
+        console.log("Updated course listing...".bold.green);
+    }
+};
 
 function* getNextCourse(ps, db, isStarting) {
 
@@ -76,8 +95,10 @@ function* getNextCourse(ps, db, isStarting) {
             return yield db.getCourseByIdAsync(course.courseName);
         }
     }
-    else
+    else {
+        yield ensureCourseListingIsCurrent(ps, db, isStarting && argv.forceCourseListingUpdate);
         return yield db.getRandomCourseAsync();
+    }
 
     return null;
 }
@@ -113,52 +134,37 @@ function* run() {
         console.log("Watching until", stopTime.format("lll") + "\r\n");
     }
 
-    console.log("Starting PluralSight Kiosk...");
+    console.log("Starting Pluralsight Kiosk...".bold.underline.white);
 
     var ps = new lorgnette.PluralsightSession(null, argv);
     var db = new lorgnette.PluralsightRepository();
     
-    console.log("Logging in...");
+    console.log("Logging in...".bold.green);
 
     var loginSuccess = yield ps.loginAsync(psUsername, psPassword);
     if (!loginSuccess) {
-        console.log("Unable to log into Pluralsight: Check your username/password.");
+        console.error("Unable to log into Pluralsight: Check your username/password.");
         yield ps.end();
         return;
     }
 
-    var courseListingStatus = yield db.getCourseListingStatusAsync();
-
-    var now = moment();
-    if (argv.forceCourseListingUpdate || (!courseListingStatus || moment(courseListingStatus.lastRetrieved).isBefore(now.subtract(7, 'days')))) {
-        console.log("Retrieving course listing... (this will take a moment)");
-        var courses = yield ps.getAllCoursesAsync();
-        var results = yield db.putCourseListingsAsync(courses);
-
-        if (!courseListingStatus)
-            courseListingStatus = {};
-        courseListingStatus.lastRetrieved = now.toDate();
-        courseListingStatus.count = courses.length;
-
-        var statusResult = yield db.putCourseListingStatusAsync(courseListingStatus);
-        console.log("Updated course listing...");
-    }
-    
     var watchNext = true;
 
     var course = yield getNextCourse(ps, db, true);
 
     if (!course) {
         if (argv.thenStop)
-            console.log("Playlist completed. Stopping.");
+            console.log("Playlist completed. Stopping.".bold.green);
         else
-            console.log("Unable to find a course to play given the supplied arguments.");
+            console.log("Unable to find a course to play given the supplied arguments.".bold.yellow);
         watchNext = false;
     }
 
     while (watchNext == true) {
 
-        console.log("Watching", course.title, ". Duration:", course.duration + "(" + course._id + ")");
+        var courseListingStatus = yield db.getCourseListingStatusAsync();
+
+        console.log("Watching".underline.bold.white, course.title.underline.bold.white, ". Duration:", course.duration + "(" + course._id + ")");
         courseListingStatus.lastCourseWatched = course._id;
 
         yield db.putCourseListingStatusAsync(courseListingStatus);
@@ -171,7 +177,7 @@ function* run() {
             var moduleTitle = _.get(openModule, "title");
             var clipTitle = _.get(selectedClip, "title");
 
-            log("Currently playing module '" + moduleTitle + "' - '" + clipTitle + "' " + currentStatus.currentTime + " / " + currentStatus.totalTime);
+            log("Currently playing module '" + moduleTitle.bold.cyan + "' - '" + clipTitle + "' " + currentStatus.currentTime + " / ".bold.yellow + currentStatus.totalTime);
 
             //If a stop time is defined, and the current time is after the stop time, request cancellation.
             if (stopTime && moment().isAfter(stopTime)) {
@@ -186,32 +192,32 @@ function* run() {
 
         switch (currentStatus.status) {
             case "Completed Course":
-                console.log("Completed Course, moving on to the next one.");
+                console.log("Completed Course, moving on to the next one.".bold.green);
                 course = yield getNextCourse(ps, db, false);
 
                 if (!course) {
                     if (argv.thenStop)
-                        console.log("Playlist completed. Stopping.");
+                        console.log("Playlist completed. Stopping.".bold.green);
                     else
-                        console.log("Unable to find a course to play.");
+                        console.log("Unable to find a course to play.".bold.yellow);
                     
                     watchNext = false;
                 }
                 break;
             case "Course Video Stuck":
-                console.log("Course video was stuck. Continuing.");
+                console.log("Course video was stuck. Continuing.".bold.yellow);
                 break;
             case "End of time allocated":
                 watchNext = false;
                 break;
             default:
-                console.log("Didn't expect this! Exiting!");
+                console.log("Didn't expect this! Exiting!".bold.red);
                 watchNext = false;
                 break;
         }
     }
 
-    console.log("Logging out...");
+    console.log("Logging out...".bold.green);
     yield ps.gotoDashboard();
     yield ps.logoutAsync();
     yield ps.end();
