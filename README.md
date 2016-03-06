@@ -155,6 +155,8 @@ What? You DON'T want to watch courses until the end of time?!
 
 Well then, simply close the browser window, or ctrl-c the process.
 
+If you're using --playlist, you can stop after a single go-through using --thenStop.
+
 Cosmological crisis adverted! (Just think of the power bill you just saved!)
 ##### Debugging:
 
