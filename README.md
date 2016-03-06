@@ -138,6 +138,11 @@ Force the full course listing to be retrieved, then watch random courses forever
 node . --username "myUser" --password "mySecretPass" --forceCourseListingUpdate
 ```
 
+Delay start for 2 minutes, then watch courses for about 2 hours, give or take a random value between +36min and -36min.
+```
+node . --username "myUser" --password "mySecretPass" --delayStart 120 --watchAbout 120
+```
+
 ##### Stopping:
 
 What? You DON'T want to watch courses until the end of time?!
