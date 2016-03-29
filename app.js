@@ -1,14 +1,11 @@
 ﻿'use strict'
-var vo = require("vo");
+var co = require("co");
 var moment = require("moment");
 var _ = require("lodash");
 var delay = require("delay");
 var colors = require("colors");
 
 var Nightmare = require('nightmare');
-
-// Adds evaluateAsync method 
-require('nightmare-evaluate-async')(Nightmare);
 
 var log = require('single-line-log').stdout;
 var argv = require('minimist')(process.argv.slice(2));
@@ -26,8 +23,10 @@ if (!psPassword) {
     process.exit(1);
 }
 
-vo(run)(function (err, result) {
-    if (err) throw err;
+co(run).then(function () {
+    console.log("done.");
+}, function (err) {
+    throw err;
 });
 
 function* ensureCourseListingIsCurrent(ps, db, force) {
@@ -105,7 +104,7 @@ function* getNextCourse(ps, db, isStarting) {
 
 function* run() {
     var lorgnette = require("./lib");
-
+    
     if (argv.delayFor) {
         console.log("Delaying start for " + argv.delayFor + " seconds.\r\n");
 
@@ -136,7 +135,9 @@ function* run() {
 
     console.log("Starting Pluralsight Kiosk...".bold.underline.white);
 
-    var ps = new lorgnette.PluralsightSession(null, argv);
+    var ps = new lorgnette.PluralsightSession(argv);
+    yield ps.initAsync();
+
     var db = new lorgnette.PluralsightRepository();
     
     console.log("Logging in...".bold.green);
@@ -144,7 +145,7 @@ function* run() {
     var loginSuccess = yield ps.loginAsync(psUsername, psPassword);
     if (!loginSuccess) {
         console.error("Unable to log into Pluralsight: Check your username/password.");
-        yield ps.end();
+        //ps.end();
         return;
     }
 
@@ -188,6 +189,13 @@ function* run() {
 
         log.clear();
         console.log();
+
+        if (!currentStatus) {
+            console.log("Failure navigating to course player. Continuing.".bold.yellow);
+            return;
+        }
+
+        
         console.log("Stopped watching video: ", currentStatus.status + " ", course.title);
 
         switch (currentStatus.status) {
@@ -220,5 +228,5 @@ function* run() {
     console.log("Logging out...".bold.green);
     yield ps.gotoDashboard();
     yield ps.logoutAsync();
-    yield ps.end();
+    ps.end();
 }
