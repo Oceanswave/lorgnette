@@ -1,11 +1,9 @@
-﻿'use strict'
+﻿'use strict';
 var co = require("co");
 var moment = require("moment");
 var _ = require("lodash");
 var delay = require("delay");
 var colors = require("colors");
-
-var Nightmare = require('nightmare');
 
 var log = require('single-line-log').stdout;
 var argv = require('minimist')(process.argv.slice(2));
@@ -53,7 +51,7 @@ function* getNextCourse(ps, db, isStarting) {
         if (argv.startAt)
             return yield db.getCourseByIdAsync(argv.startAt);
         else if (argv.continue) {
-            var history = yield ps.getUserHistoryAsync();
+            let history = yield ps.getUserHistoryAsync();
             if (history && history.length > 0) {
                 var lastCourse = _.head(history);
                 return yield db.getCourseByIdAsync(lastCourse.course.name);
@@ -62,19 +60,19 @@ function* getNextCourse(ps, db, isStarting) {
     }
 
     if (argv.playlist) {
-        var playlists = yield ps.getUserPlaylistsAsync();
-        var selectedPlaylist = _.find(playlists, { name: argv.playlist });
+        let playlists = yield ps.getUserPlaylistsAsync();
+        let selectedPlaylist = _.find(playlists, { name: argv.playlist });
         
         //RuhRoh.
         if (!selectedPlaylist)
             throw "The specified playlist cound not be found: " + argv.playlist;
 
-        var history = yield ps.getUserHistoryAsync();
+        let history = yield ps.getUserHistoryAsync();
 
         //If the immediate history indicates that a course in the playlist has been watched, start from playlist position n + 1.
         if (history && history.length > 0) {
-            var lastCourse = _.head(history);
-            var existingIndex = _.findIndex(selectedPlaylist.playlistItems, { "course.name": lastCourse.name });
+            let lastCourse = _.head(history);
+            let existingIndex = _.findIndex(selectedPlaylist.playlistItems, { "course.name": lastCourse.name });
             if (existingIndex > -1 && existingIndex < selectedPlaylist.playlistItems.length - 1) {
                 return yield db.getCourseByIdAsync(selectedPlaylist.playlistItems[existingIndex + 1].course.name);
             }
@@ -88,9 +86,31 @@ function* getNextCourse(ps, db, isStarting) {
         return yield db.getCourseByIdAsync(_.head(selectedPlaylist.playlistItems).course.name);
     }
     else if (argv.search) {
-        var courses = yield ps.getAllCoursesAsync({ q: argv.search });
+        let courses = yield ps.getAllCoursesAsync({ q: argv.search });
+
         if (courses && courses.length > 0) {
-            var course = _.sample(courses);
+            let course = null;
+            
+            if (argv.fresh) {
+                let watchedCourses = yield db.getWatchedCoursesAsync();
+                if (watchedCourses.length == courses.length) {
+                    if (argv.thenStop)
+                        return null;
+
+                    course = _.sample(courses);
+                }
+                else {
+                    do
+                    {
+                        course = _.sample(courses);
+                    }
+                    while (_.find(watchedCourses, {courseName: course.courseName}))
+                }
+            }
+            else {
+                course = _.sample(courses);
+            }
+                
             return yield db.getCourseByIdAsync(course.courseName);
         }
     }
@@ -201,6 +221,8 @@ function* run() {
         switch (currentStatus.status) {
             case "Completed Course":
                 console.log("Completed Course, moving on to the next one.".bold.green);
+                yield db.putWatchedCourseAsync(course);
+
                 course = yield getNextCourse(ps, db, false);
 
                 if (!course) {
