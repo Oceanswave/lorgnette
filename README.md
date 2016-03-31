@@ -49,7 +49,7 @@ Which will login to Pluralsight with the specified credentials and play random c
 
 #####Options:
 
-|CLI Argument | Optional/Required | Description
+|CLI Argument | Optional/Required | Description |
 |-------------|-------------------|--------------------|
 |username | Required | The username of the subscriber to run the kiosk as.|
 |password | Required | The password of the subscriber to run the kiosk as.|
@@ -61,8 +61,9 @@ Which will login to Pluralsight with the specified credentials and play random c
 |startAt | Optional | Specify a specific course by id to start playback at. (default: none)|
 |continue| Optional | Specify that Lorgnette should continue at the last course watched. (default: false) |
 |playlist| Optional | Specify that Lorgnette should display courses in the specified Pluralsight playlist, looping to the first when completed (Playlist can be mutated while displaying). (default: none)|
-|thenStop | Optional | Applies only if playlist has been supplied. Watches the indicated playlist then stops. (default: false)|
+|thenStop | Optional | Applies only if playlist or fresh has been supplied. Watches the indicated playlist (or fresh content) then stops. (default: false)|
 |search| Optional | Specify that Lorgnette should play courses with the specified search terms. Courses are selected and played randomly from the results. (default: none)|
+|fresh| Optional | Specify that Lorgnette should favor playing unwatched courses. If all courses are watched, Courses are then played randomly. (default: false)|
 |delayStart | Optional | Delay starting for n number of seconds. This easily delays the playback on system restart or when invoking from a script. (default: no delay)|
 |watchFor | Optional | Only watch videos for exactly n number of minutes and then logout of Pluralsight and exit. Good for chaining Lorgnette in a script as part of other information sources when displaying on a Kiosk. (default: none) |
 |watchAbout | Optional | Only watch videos about n number of minutes and then logout of Pluralsight and exit. (default: none)|
