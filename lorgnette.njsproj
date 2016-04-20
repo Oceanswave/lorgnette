@@ -31,6 +31,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="lib\index.js" />
+    <Compile Include="lib\pluralsightController.js" />
     <Compile Include="lib\pluralsightSession.js" />
     <Compile Include="app.js" />
     <Compile Include="lib\pluralsightRepository.js" />
