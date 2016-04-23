@@ -79,6 +79,7 @@ $RECYCLE.BIN/
 *.lnk
 
 #otherstuff
-.pluralsight
 .idea
+.pluralsight
+.vscode
 obj
