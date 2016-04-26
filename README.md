@@ -26,7 +26,7 @@ It's also a fun experiment in node, electron, nightmare, promises, ES6 function 
 ---
 
 ##NOTE!!
-Do not use Lorgnette to continuously play videos for long periods of time!! Although Lorgnette doesn't bypass any controls on the Pluralsight site nor does it bypass their viewer software, Pluralsight apparently uses the **number of requests** rather than the **duration of videos** to determine a threshold of what they call 'abuse'.
+Do not use Lorgnette to continuously play course videos from Pluralsight for long periods of time!! Although Lorgnette doesn't bypass any controls on the Pluralsight site nor does it bypass their viewer software, Pluralsight apparently uses the **number of requests** rather than the **duration of videos** to determine a threshold of what they call 'abuse'.
 
 This means if you watch 8 hours of content a day, if this happens to result in a number of requests that exceeds their arbitrary threshold, your account will be locked and you will get a naughty-gram in your inbox that you will need to resolve.
 
