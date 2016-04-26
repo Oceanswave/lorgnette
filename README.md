@@ -22,6 +22,14 @@ Lorgnette is written in node and allows for cross-platform (Tested on OSx and Wi
 Lorgnette also uses PouchDB to store the full Pluralsight course listing locally so that retrieving a random course is done locally. It pulls the course listing down on first run and every 7 days thereafter. 
 
 It's also a fun experiment in node, electron, nightmare, promises, ES6 function generators and coroutines. Yeah, man! Love me some coroutines!
+
+##NOTE!!
+Do not use Lorgnette to continuously play videos for long periods of time!! Although Lorgnette doesn't bypass any controls on the Pluralsight site nor does it bypass their viewer software, Pluralsight apparently uses the **number of requests** rather than the **duration of videos** to determine a threshold of what they call 'abuse'.
+
+This means if you watch 8 hours of content a day, if this happens to result in a number of requests that exceeds their arbitrary threshold, your account will be locked and you will get a naughty-gram in your inbox that you will need to resolve.
+
+In a perfect world a, granted atypical, user should be able to watch 48 hours of content (e.g. 24 hours at 2x speed, which their viewer allows) a day and not be presented with any accusations, however, this is **not** the case, sadly.
+
 #####Installation:
 Ensure Node and Git are installed.
 
