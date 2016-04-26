@@ -23,6 +23,8 @@ Lorgnette also uses PouchDB to store the full Pluralsight course listing locally
 
 It's also a fun experiment in node, electron, nightmare, promises, ES6 function generators and coroutines. Yeah, man! Love me some coroutines!
 
+---
+
 ##NOTE!!
 Do not use Lorgnette to continuously play videos for long periods of time!! Although Lorgnette doesn't bypass any controls on the Pluralsight site nor does it bypass their viewer software, Pluralsight apparently uses the **number of requests** rather than the **duration of videos** to determine a threshold of what they call 'abuse'.
 
