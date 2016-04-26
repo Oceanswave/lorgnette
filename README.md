@@ -32,6 +32,8 @@ This means if you watch 8 hours of content a day, if this happens to result in a
 
 In a perfect world a, granted atypical, user should be able to watch 48 hours of content (e.g. 24 hours at 2x speed, which their viewer allows) a day and not be presented with any accusations, however, this is **not** the case, sadly.
 
+My suggestion then is to have your kiosk display content not only from pluralsight, but from other sources as well, limiting Pluralsight based content to 1-2 hours a day. 
+
 ---
 
 #####Installation:
